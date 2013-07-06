@@ -1,51 +1,15 @@
-4chan API
-=========
+Mitsuba API
+===========
 
 ## Welcome ##
 
-Welcome to 4chan's poorly documented read-only JSON API guide!
+Welcome to Mitsuba's poorly documented read-only JSON API guide!
 
-JSON representations of threads and indexes are exposed at the following URLs:
+JSON representations of threads are exposed at the following URLs:
 
-http(s)://api.4chan.org/`board`/res/`threadnumber`.json  
-http(s)://api.4chan.org/`board`/`pagenumber`.json (0 is main index)
+http(s)://example.com/`board`/res/`threadnumber`.json
 
-A JSON representation of all thread OPs from an individual board can be found at the following URL:
-
-http(s)://api.4chan.org/`board`/catalog.json
-
-And just the thread IDs and their respective pages can be found here:
-
-http(s)://api.4chan.org/`board`/threads.json
-
-A list of boards is exposed at the following URL:
-
-http(s)://api.4chan.org/boards.json
-
-CORS is supported with an origin of http(s)://boards.4chan.org
-
-Supported request methods are: GET, HEAD, OPTIONS
-
-Questions? Please e-mail [api@4chan.org](mailto:api@4chan.org).
-
-*This guide was last updated March 22, 2013.*
-
-### API Rules ###
-
-1. Do not make more than one request per second.
-2. Thread updating should be set to a minimum of 10 seconds, preferably higher.
-3. Use If-Modified-Since when doing your requests.
-4. Make API requests using the same protocol as the app. Only use SSL when a user is accessing your app over HTTPS.
-5. More to come later...
-
-### API Terms of Service ###
-
-1. You may not use "4chan" in the title of your application, product, or service.
-2. You may not use the 4chan name, logo, or brand to promote your application, product, or service.
-3. You must disclose the source of the information shown by your application, product, or service as 4chan, and provide a link.
-4. You may not market your application, product, or service as being "official" in any way.
-5. You may not clone the live site and its functionality. This means don't suck down our JSON, host it elsewhere, and throw ads around it.
-6. These terms are subject to change without notice.
+*This guide was last updated July 06, 2013.*
 
 ### Posts Object ####
 
@@ -66,6 +30,13 @@ Questions? Please e-mail [api@4chan.org](mailto:api@4chan.org).
 | `email`         | `string`       | Email                | text                                       | `moot@4chan.org`      |
 | `sub`           | `string`       | Subject              | text                                       | `This is a subject`   |
 | `com`           | `string`       | Comment              | text (includes escaped HTML)               | `This is a comment`   |
+| `files`         | `array`        | Files info           | array (described lower)                    |                       |
+| `filedeleted`   | `integer`      | File deleted?        | 0 (no), 1 (yes)                            | `0`                   |
+| `spoiler`       | `integer`      | Spoiler image?       | 0 (no), 1 (yes)                            | `0`                   |
+| `custom_spoiler`| `integer`      | Custom spoilers?     | 1-99                                       | `3`                   |
+
+### Files array ###
+
 | `tim`           | `integer`      | Renamed filename     | UNIX timestamp + microseconds              | `1344402680740`       |
 | `filename`      | `string`       | Original filename    | text                                       | `OPisa`               |
 | `ext`           | `string`       | File extension       | .jpg, .png, .gif, .pdf, .swf               | `.jpg`                |
@@ -75,15 +46,7 @@ Questions? Please e-mail [api@4chan.org](mailto:api@4chan.org).
 | `h`             | `integer`      | Image height         | 1-10000                                    | `500`                 |
 | `tn_w`          | `integer`      | Thumbnail width      | 1-250                                      | `250`                 |
 | `tn_h`          | `integer`      | Thumbnail height     | 1-250                                      | `250`                 |
-| `filedeleted`   | `integer`      | File deleted?        | 0 (no), 1 (yes)                            | `0`                   |
-| `spoiler`       | `integer`      | Spoiler image?       | 0 (no), 1 (yes)                            | `0`                   |
-| `custom_spoiler`| `integer`      | Custom spoilers?     | 1-99                                       | `3`                   |
-| `omitted_posts` | `integer`      | # replies omitted    | 1-10000                                    | `33`                  |
-| `omitted_images`| `integer`      | # image replies omitted | 1-10000                                 | `21`                  |
-| `replies`       | `integer`      | # replies total      | 0-99999                                    | `231`                 |
-| `images`        | `integer`      | # images total       | 0-99999                                    | `132`                 |
-| `bumplimit`     | `integer`      | Bump limit met?      | 0 (no), 1 (yes)                            | `0`                   |
-| `imagelimit`    | `integer`      | Image limit met?     | 0 (no), 1 (yes)                            | `1`                   |
+
 
 **Note the following attributes are optional:**  
 `sticky` `closed` (only displays on OPs when true)  
