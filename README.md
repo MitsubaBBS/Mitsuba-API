@@ -37,6 +37,8 @@ http(s)://example.com/`board`/res/`threadnumber`.json
 
 ### Files array ###
 
+| **attribute**   | **value**      | **description**      | **possible values**                        | **example value**     |
+|:----------------|:---------------|:---------------------|:-------------------------------------------|:----------------------|
 | `tim`           | `integer`      | Renamed filename     | UNIX timestamp + microseconds              | `1344402680740`       |
 | `filename`      | `string`       | Original filename    | text                                       | `OPisa`               |
 | `ext`           | `string`       | File extension       | .jpg, .png, .gif, .pdf, .swf               | `.jpg`                |
